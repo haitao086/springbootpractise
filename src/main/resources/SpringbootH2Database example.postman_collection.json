@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "466a0549-ae4e-4d02-9bd9-cf598c2b34cc",
+		"name": "SpringbootH2Database example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "444b17b1-d478-4c66-baab-ba1ba70a8c5e",
+						"exec": [
+							"// Random age.\r",
+							"pm.environment.set(\"age\", _.random(1, 10));\r",
+							"// Random email address.\r",
+							"pm.environment.set(\"email\", _.random(1, 99) + \"@myDomain.com\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Test-{{$timestamp}}\",\r\n  \"age\": {{age}},\r\n  \"emailAddress\": \"{{email}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/student/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10090",
+					"path": [
+						"student",
+						"save"
+					]
+				},
+				"description": "Save student details in the h2 database."
+			},
+			"response": []
+		},
+		{
+			"name": "Get",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "beffd1c0-2a53-4dc3-a594-8ffeb82e276d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.jcg.api.v1+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/student/getall",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10090",
+					"path": [
+						"student",
+						"getall"
+					]
+				},
+				"description": "Get all students from the h2 database."
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
